@@ -41,6 +41,17 @@ packages:
 #   commit: e7b331f14bcffb8367cd58fbfc8b40ec7642100a
 #
 # extra-deps: []
+extra-deps:
+  - HDBC-sqlite3-2.3.3.1
+  - persistable-record-0.6.0.5
+  - git: https://github.com/Tarmean/haskell-relational-record.git
+    commit: 38ea01bfcbf4a398845ae58e6c92624d0284df98
+    subdirs:
+      - relational-query
+  - relational-query-HDBC-0.7.2.0
+  - git: https://github.com/Tarmean/haskell-product-isomorphic.git
+    commit: 1afd4b733b6a694e4e02236a27a5b269623ad2ec
+  - relational-schemas-0.1.8.0
 
 # Override default flag values for local packages and extra-deps
 # flags: {}
@@ -65,3 +76,7 @@ packages:
 #
 # Allow a newer minor version of GHC than the snapshot specifies
 # compiler-check: newer-minor
+
+# sqlite3 must be installed by linuxbrew.
+extra-include-dirs: [/home/linuxbrew/.linuxbrew/include]
+extra-lib-dirs: [/home/linuxbrew/.linuxbrew/lib]

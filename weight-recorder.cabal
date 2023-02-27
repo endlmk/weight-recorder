@@ -19,9 +19,22 @@ executable weight-recorder
   main-is:             Main.hs
   default-language:    Haskell2010
   build-depends:       base >= 4.7 && < 5
-                     , Spock >= 0.11
+                     , bcrypt 
+                     , bytestring
+                     , filepath
+                     , HDBC
+                     , HDBC-sqlite3
+                     , http-types
                      , mtl
+                     , Spock >= 0.11
+                     , persistable-record
+                     , relational-query-HDBC
+                     , relational-query
+                     , resource-pool
                      , text
+                     , time
+                     , transformers
+                     , wai
   ghc-options:         -Wall
                        -Wcompat
                        -Widentities
@@ -31,3 +44,4 @@ executable weight-recorder
                        -Wmissing-home-modules
                        -Wpartial-fields
                        -Wredundant-constraints
+                       -XImportQualifiedPost

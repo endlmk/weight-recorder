@@ -3,7 +3,59 @@
 # For more information, please see the documentation at:
 #   https://docs.haskellstack.org/en/stable/lock_files
 
-packages: []
+packages:
+- completed:
+    hackage: HDBC-sqlite3-2.3.3.1@sha256:5025fd94d02b9b3f0b8b8233796dd9a85a0b3dda6503c6e671e3eddbc51cb4d4,2424
+    pantry-tree:
+      sha256: 76e71f73502350ed3fe5fc64604a21a3c8027d49fe6846183d53dbdaf583437a
+      size: 1427
+  original:
+    hackage: HDBC-sqlite3-2.3.3.1
+- completed:
+    hackage: persistable-record-0.6.0.5@sha256:0ba4ceca681b5eb7ec9e57adea54c781cbe0cb8014d037b5fa024e8738cf644f,3180
+    pantry-tree:
+      sha256: a1e0e8947b3be4be3ea24bbc2a928b56acf067d128dd8613608656eec9d47148
+      size: 970
+  original:
+    hackage: persistable-record-0.6.0.5
+- completed:
+    commit: 38ea01bfcbf4a398845ae58e6c92624d0284df98
+    git: https://github.com/Tarmean/haskell-relational-record.git
+    name: relational-query
+    pantry-tree:
+      sha256: 756bc16bdbc2ea3061689eef519efc7f2b1743f7a9381142d496428d62f34c95
+      size: 5595
+    subdir: relational-query
+    version: 0.12.2.3
+  original:
+    commit: 38ea01bfcbf4a398845ae58e6c92624d0284df98
+    git: https://github.com/Tarmean/haskell-relational-record.git
+    subdir: relational-query
+- completed:
+    hackage: relational-query-HDBC-0.7.2.0@sha256:e68a11962963628a1489b0dc6a9abae4e53c667e35d3c6eadcbb561b70d76c74,4280
+    pantry-tree:
+      sha256: 4b3f510839e2f7765a8ddefb4103afd34834e7c1d797fb904de8bb46dd8ac45a
+      size: 1867
+  original:
+    hackage: relational-query-HDBC-0.7.2.0
+- completed:
+    commit: 1afd4b733b6a694e4e02236a27a5b269623ad2ec
+    git: https://github.com/Tarmean/haskell-product-isomorphic.git
+    name: product-isomorphic
+    pantry-tree:
+      sha256: 2b60cbdb57ff53b10d1c700a9fc6bd943efb6cec8fe89671beb688fc9c6cf9d9
+      size: 1053
+    version: 0.0.3.3
+  original:
+    commit: 1afd4b733b6a694e4e02236a27a5b269623ad2ec
+    git: https://github.com/Tarmean/haskell-product-isomorphic.git
+- completed:
+    hackage: relational-schemas-0.1.8.0@sha256:31b679fc1fa73cd88e6798ed089cd83876919c7f84952fae8794702be94fd9de,6138
+    pantry-tree:
+      sha256: 2019acbbedf08a43ac6f5a1186dd687c02ac5df7ac9d6cf7a2735b2fcc050710
+      size: 5126
+  original:
+    hackage: relational-schemas-0.1.8.0
 snapshots:
 - completed:
     sha256: adbc602422dde10cc330175da7de8609e70afc41449a7e2d6e8b1827aa0e5008
