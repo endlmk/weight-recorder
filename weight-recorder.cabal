@@ -14,10 +14,10 @@ extra-source-files:  README.md
                      CHANGELOG.md
 cabal-version:       >=1.10
 
-executable weight-recorder
-  hs-source-dirs:      app
-  main-is:             Main.hs
+library
+  hs-source-dirs:      src
   default-language:    Haskell2010
+  exposed-modules:     App
   build-depends:       base >= 4.7 && < 5
                      , bcrypt 
                      , bytestring
@@ -45,3 +45,44 @@ executable weight-recorder
                        -Wpartial-fields
                        -Wredundant-constraints
                        -XImportQualifiedPost
+
+executable weight-recorder
+  hs-source-dirs:      app
+  main-is:             Main.hs
+  default-language:    Haskell2010
+  build-depends:       base >= 4.7 && < 5
+                     , weight-recorder
+  ghc-options:         -Wall
+                       -Wcompat
+                       -Widentities
+                       -Wincomplete-record-updates
+                       -Wincomplete-uni-patterns
+                       -Wmissing-export-lists
+                       -Wmissing-home-modules
+                       -Wpartial-fields
+                       -Wredundant-constraints
+                       -XImportQualifiedPost
+
+test-suite weight-recorder-test
+  type:               exitcode-stdio-1.0
+  hs-source-dirs:     test
+  main-is:            Spec.hs
+  build-depends:      base >=4.7 && <5
+                      , hspec
+                      , hspec-wai
+                      , Spock >=0.14
+                      , weight-recorder
+  ghc-options:        -Wall
+                      -Wcompat
+                      -Widentities
+                      -Wincomplete-record-updates
+                      -Wincomplete-uni-patterns
+                      -Wmissing-export-lists
+                      -Wmissing-home-modules
+                      -Wpartial-fields
+                      -Wredundant-constraints
+                      -O2
+                      -threaded
+                      -rtsopts
+                      -with-rtsopts=-N
+  default-language:   Haskell2010
