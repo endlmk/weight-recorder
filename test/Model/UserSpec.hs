@@ -15,7 +15,7 @@ spec =
         it "inserts new user" $
           do
             c <- connectSqlite3 "weight.db"
-            -- _ <- insertUser (NewUser "test" "pass") c
+            _ <- insertUser (NewUser "test" "pass") c
             st <- prepare c "SELECT COUNT(*) FROM user"
             _ <- execute st []
             (fetchRow st) `shouldReturn` Just [SqlInt64 1]
