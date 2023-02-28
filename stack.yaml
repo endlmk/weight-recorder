@@ -76,7 +76,3 @@ extra-deps:
 #
 # Allow a newer minor version of GHC than the snapshot specifies
 # compiler-check: newer-minor
-
-# sqlite3 must be installed by linuxbrew.
-extra-include-dirs: [/home/linuxbrew/.linuxbrew/include]
-extra-lib-dirs: [/home/linuxbrew/.linuxbrew/lib]
