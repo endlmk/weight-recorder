@@ -75,7 +75,9 @@ test-suite weight-recorder-test
                     , hspec-wai
                     , HDBC
                     , HDBC-sqlite3
+                    , process
                     , Spock >=0.14
+                    , temporary
                     , weight-recorder
   ghc-options:        -Wall
                       -Wcompat
