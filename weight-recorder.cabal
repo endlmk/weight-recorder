@@ -33,6 +33,7 @@ library
                      , relational-query-HDBC
                      , relational-query
                      , resource-pool
+                     , product-isomorphic
                      , text
                      , time
                      , transformers
