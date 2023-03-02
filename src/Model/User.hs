@@ -7,7 +7,7 @@
 module Model.User (NewUser (NewUser, nuName, nuPassword), insertUser, selectUser) where
 
 import Control.Exception (catch)
-import Crypto.BCrypt (hashPasswordUsingPolicy, slowerBcryptHashingPolicy)
+import Crypto.BCrypt (hashPasswordUsingPolicy, slowerBcryptHashingPolicy, validatePassword)
 import Data.ByteString qualified as BS
 import Data.Functor.ProductIsomorphic
 import Data.Text (pack, unpack)
@@ -59,4 +59,18 @@ dec :: BS.ByteString -> String
 dec = unpack . decodeUtf8
 
 selectUser :: IConnection c => String -> String -> c -> IO (Maybe User.User)
-selectUser _ _ _ = do return Nothing
+selectUser name pass c = do
+  user <- DHR.runQuery c q name >>= DHR.listToUnique
+  return $ user >>= checkHash
+  where
+    q = HRR.relationalQuery . HRR.relation' . HRR.placeholder $
+      \ph -> do
+        a <- HRR.query User.user
+        HRR.wheres $ a HRR.! User.name' HRR..=. ph
+        return a
+    checkHash user
+      | validated = Just user
+      | otherwise = Nothing
+      where
+        hashed = User.password user
+        validated = validatePassword (enc hashed) (enc pass)

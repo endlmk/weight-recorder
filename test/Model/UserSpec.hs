@@ -28,9 +28,14 @@ spec =
         it "select user" $
           do
             withSystemTempFile "test.db" $
-              \path _ -> do
-                callCommand $ "sqlite3 " ++ path ++ "< data/schema.sql"
-                c <- connectSqlite3 path
-                _ <- insertUser (NewUser "test" "pass") c
-                selectUser "test" "pass" c `shouldReturn` Just (User.User 1 "test" "pass")
-
+              \path _ ->
+                do
+                  callCommand $ "sqlite3 " ++ path ++ "< data/schema.sql"
+                  c <- connectSqlite3 path
+                  _ <- insertUser (NewUser "test" "pass") c
+                  u <- selectUser "test" "pass" c
+                  case u of
+                    Just usr -> do
+                      User.id usr `shouldBe` 1
+                      User.name usr `shouldBe` "test"
+                    Nothing -> u `shouldNotBe` Nothing
