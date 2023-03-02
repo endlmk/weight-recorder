@@ -17,4 +17,4 @@ defineTableFromDB
   (driverSQLite3 {typeMap = [("INTEGER", [t|Int|])]})
   "main"
   "user"
-  [''Show, ''Generic]
+  [''Show, ''Generic, ''Eq]

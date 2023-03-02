@@ -4,7 +4,7 @@
 {-# LANGUAGE MultiParamTypeClasses #-}
 {-# LANGUAGE TemplateHaskell #-}
 
-module Model.User (NewUser (NewUser, nuName, nuPassword), insertUser) where
+module Model.User (NewUser (NewUser, nuName, nuPassword), insertUser, selectUser) where
 
 import Control.Exception (catch)
 import Crypto.BCrypt (hashPasswordUsingPolicy, slowerBcryptHashingPolicy)
@@ -57,3 +57,6 @@ enc = encodeUtf8 . pack
 
 dec :: BS.ByteString -> String
 dec = unpack . decodeUtf8
+
+selectUser :: IConnection c => String -> String -> c -> IO (Maybe User.User)
+selectUser _ _ _ = do return Nothing

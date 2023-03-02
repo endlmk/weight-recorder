@@ -94,4 +94,5 @@ test-suite weight-recorder-test
                       -threaded
                       -rtsopts
                       -with-rtsopts=-N
+                      -XImportQualifiedPost
   default-language:   Haskell2010
