@@ -4,16 +4,18 @@
 {-# LANGUAGE MultiParamTypeClasses #-}
 {-# LANGUAGE TemplateHaskell #-}
 
-module Model.WeightRecord (NewWRecord (NewWRecord, nwrUserId, nwrTime, nwrWeight), insertNewWRecord) where
+module Model.WeightRecord (NewWRecord (NewWRecord, nwrUserId, nwrTime, nwrWeight), insertNewWRecord, selectWRecord) where
 
 import Control.Exception (catch)
 import Data.Functor.ProductIsomorphic
 import Data.Time qualified as TM
 import Database.HDBC (IConnection, SqlError, withTransaction)
 import Database.HDBC.Query.TH (makeRelationalRecord)
+import Database.HDBC.Record (runQuery)
 import Database.HDBC.Record qualified as DHR
 import Database.Relational (Pi, defaultConfig)
 import Database.Relational qualified as HRR
+import Entity.WeightRecord (WeightRecord (userId))
 import Entity.WeightRecord qualified as WRecord
 import GHC.Generics (Generic)
 import System.IO (hPrint, stderr)
@@ -39,3 +41,13 @@ insertNewWRecord wr conn = do
         `catch` \e -> do
           hPrint stderr (e :: SqlError)
           return 0
+
+selectWRecord :: IConnection c => Int -> c -> IO [WRecord.WeightRecord]
+selectWRecord userId conn = DHR.runQuery conn q userId
+  where
+    q = HRR.relationalQuery . HRR.relation' . HRR.placeholder $
+      \ph -> do
+        a <- HRR.query WRecord.weightRecord
+        HRR.wheres $ a HRR.! WRecord.userId' HRR..=. ph
+        HRR.desc $ a HRR.! WRecord.time'
+        return a

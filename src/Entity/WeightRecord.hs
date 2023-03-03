@@ -17,4 +17,4 @@ defineTableFromDB
   (driverSQLite3 {typeMap = [("FLOAT", [t|Double|]), ("INTEGER", [t|Int|])]})
   "main"
   "weight_record"
-  [''Show, ''Generic]
+  [''Show, ''Generic, ''Eq]
