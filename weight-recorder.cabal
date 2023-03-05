@@ -84,6 +84,7 @@ test-suite weight-recorder-test
                     , Spock >=0.14
                     , temporary
                     , time
+                    , wai-extra
                     , weight-recorder
   ghc-options:        -Wall
                       -Wcompat
