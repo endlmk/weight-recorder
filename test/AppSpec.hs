@@ -18,14 +18,7 @@ spec =
       with (spockAsApp app) $
         do
           it "serves the home page" $
-            get "/" `shouldRespondWith` "Hello World!" {matchStatus = 200}
-    describe "Get /hello/:name" $
-      with (spockAsApp app) $
-        do
-          it "returns hello to spock" $
-            get "/hello/spock" `shouldRespondWith` "Hello spock, you are visitor number 1"
-          it "returns hello to uhura" $
-            get "/hello/uhura" `shouldRespondWith` "Hello uhura, you are visitor number 1"
+            get "/" `shouldRespondWith` 200
     describe "GET with Network.WAi.Test" $
       it "Get home" $
         do
@@ -34,3 +27,5 @@ spec =
             do
               response <- Network.Wai.Test.request (setPath defaultRequest "/")
               assertStatus 200 response
+              assertBodyContains "ユーザー登録" response
+              assertBodyContains "ログイン" response
