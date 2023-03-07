@@ -3,9 +3,9 @@
 module Web.View.Start (startView, loadStartTemplate) where
 
 import Data.Text qualified as TXT
-import Text.Mustache (Template, automaticCompile)
-import Web.Core (WRAction, WRConfig (wrcTplRoots))
-import Web.Spock (html)
+import Text.Mustache (Template, automaticCompile, object, substitute, (~>))
+import Web.Core (WRAction, WRConfig (wrcTplRoots), WRState (wrstStartTemplate))
+import Web.Spock (getState, html)
 
 loadStartTemplate :: WRConfig -> IO Template
 loadStartTemplate cfg = do
@@ -15,4 +15,9 @@ loadStartTemplate cfg = do
     Right template -> return template
 
 startView :: Maybe TXT.Text -> WRAction a
-startView mMes = do html "ユーザー登録 ログイン"
+startView mMes = do
+  tpl <- wrstStartTemplate <$> getState
+  html $ substitute tpl $ object (toPairs mMes)
+  where
+    toPairs (Just mes) = ["message" ~> mes]
+    toPairs Nothing = []

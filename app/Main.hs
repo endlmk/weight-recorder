@@ -2,7 +2,12 @@
 
 module Main (main) where
 
-import App (app, runApp)
+import Paths_weight_recorder (getDataDir)
+import System.FilePath ((</>))
+import Web.Core (WRConfig (WRConfig, wrcTplRoots))
+import Web.WeightRecorder (runWeightRecorder)
 
 main :: IO ()
-main = runApp
+main = do
+  dataDir <- getDataDir
+  runWeightRecorder WRConfig {wrcTplRoots = [dataDir </> "templates"]}
