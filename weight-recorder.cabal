@@ -97,6 +97,7 @@ test-suite weight-recorder-test
                     , temporary
                     , time
                     , utf8-string
+                    , wai
                     , wai-extra
                     , weight-recorder
   ghc-options:        -Wall
