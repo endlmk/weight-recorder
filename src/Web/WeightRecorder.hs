@@ -3,8 +3,9 @@
 module Web.WeightRecorder (weightRecorderMiddleware, runWeightRecorder) where
 
 import Network.Wai
+import Web.Action.Register (registerAction)
 import Web.Core (WRAction, WRApp, WRConfig, WRContext, WRSession, WRState (WRState, wrstStartTemplate), emptyContext, emptySession)
-import Web.Spock (get, getContext, prehook, root, runSpock, spock)
+import Web.Spock (get, getContext, post, prehook, root, runSpock, spock)
 import Web.Spock.Config (PoolOrConn (PCNoDatabase), SpockCfg (SpockCfg), defaultSpockCfg)
 import Web.View.Start (loadStartTemplate, startView)
 
@@ -14,6 +15,7 @@ spockApp =
     (return emptyContext)
     $ do
       get root $ startView Nothing
+      post "register" registerAction
 
 weightRecorderMiddleware :: WRConfig -> IO Middleware
 weightRecorderMiddleware cfg = do
