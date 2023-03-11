@@ -87,7 +87,10 @@ test-suite weight-recorder-test
                       , Model.WeightRecordSpec
                       , Paths_weight_recorder
   build-depends:      base >=4.7 && <5
+                    , bytestring
+                    , directory
                     , filepath
+                    , http-types
                     , hspec
                     , hspec-wai
                     , HDBC

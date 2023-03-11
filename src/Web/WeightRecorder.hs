@@ -8,7 +8,7 @@ import Database.HDBC.Sqlite3 (Connection, connectSqlite3)
 import Network.Wai
 import Web.Action.Register (registerAction)
 import Web.Core (WRAction, WRApp, WRConfig (..), WRContext, WRSession, WRState (WRState, wrstStartTemplate), emptyContext, emptySession)
-import Web.Spock (get, getContext, post, prehook, root, runSpock, spock)
+import Web.Spock (get, getContext, html, post, prehook, root, runSpock, spock)
 import Web.Spock.Config (PoolOrConn (PCNoDatabase, PCPool), SpockCfg (SpockCfg), defaultSpockCfg)
 import Web.View.Start (loadStartTemplate, startView)
 
@@ -19,6 +19,7 @@ spockApp =
     $ do
       get root $ startView Nothing
       post "register" registerAction
+      post "login" $ html "test"
 
 weightRecorderMiddleware :: WRConfig -> IO Middleware
 weightRecorderMiddleware cfg = do
