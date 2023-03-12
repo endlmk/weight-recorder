@@ -2,7 +2,7 @@ module Web.Core
   ( WRApp,
     WRAction,
     WRConfig (WRConfig, wrcDBPath, wrcTplRoots),
-    WRState (WRState, wrstStartTemplate),
+    WRState (WRState, wrstStartTemplate, wrstMainTemplate),
     WRContext (WRContext, wrconUser),
     emptyContext,
     WRSession (WRSession, wrsesUser),
@@ -17,10 +17,8 @@ import Entity.User qualified as User
 import Text.Mustache (Template)
 import Web.Spock (SpockActionCtx, SpockCtxM, runQuery)
 
--- TODO Add WRConnection
 type WRApp ctx = SpockCtxM ctx WRConnection WRSession WRState
 
--- TODO Add WRConnection
 type WRAction = SpockActionCtx WRContext WRConnection WRSession WRState
 
 data WRConfig = WRConfig
@@ -29,7 +27,9 @@ data WRConfig = WRConfig
   }
 
 data WRState = WRState
-  {wrstStartTemplate :: !Template}
+  { wrstStartTemplate :: !Template,
+    wrstMainTemplate :: !Template
+  }
 
 newtype WRContext = WRContext
   {wrconUser :: Maybe User.User}
@@ -40,8 +40,7 @@ emptyContext = WRContext Nothing
 type WRConnection = Connection
 
 newtype WRSession = WRSession
-  { wrsesUser :: Maybe User.User
-  }
+  {wrsesUser :: Maybe User.User}
 
 emptySession :: WRSession
 emptySession = WRSession Nothing

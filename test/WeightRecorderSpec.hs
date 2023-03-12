@@ -91,4 +91,6 @@ spec =
                   assertStatus 200 response
                   bodyContains "登録しました。ログインしてください。" response
                   response2 <- post "/login" "name=hoge&password=hage"
-                  assertStatus 200 response2
+                  assertStatus 302 response2 -- redirect
+                  response3 <- get "/"
+                  bodyContains "hogeさん、こんにちは" response3

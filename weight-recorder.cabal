@@ -26,8 +26,10 @@ library
                      , Model.User
                      , Model.WeightRecord
                      , Web.Action.Register
+                     , Web.Action.Login
                      , Web.Core
                      , Web.View.Start
+                     , Web.View.Main
                      , Web.WeightRecorder
   build-depends:       base >= 4.7 && < 5
                      , bcrypt 
