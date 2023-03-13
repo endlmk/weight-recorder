@@ -27,6 +27,7 @@ library
                      , Model.WeightRecord
                      , Web.Action.Register
                      , Web.Action.Login
+                     , Web.Action.NewRecord
                      , Web.Core
                      , Web.View.Start
                      , Web.View.Main

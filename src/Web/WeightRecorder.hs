@@ -7,9 +7,10 @@ import Database.HDBC (IConnection (disconnect))
 import Database.HDBC.Sqlite3 (Connection, connectSqlite3)
 import Network.Wai
 import Web.Action.Login (loginAction)
+import Web.Action.NewRecord (newRecordAction)
 import Web.Action.Register (registerAction)
 import Web.Core (WRAction, WRApp, WRConfig (..), WRContext (wrconUser), WRSession (wrsesUser), WRState (WRState, wrstMainTemplate, wrstStartTemplate), emptyContext, emptySession)
-import Web.Spock (get, getContext, html, post, prehook, readSession, root, runSpock, spock)
+import Web.Spock (get, getContext, post, prehook, readSession, root, runSpock, spock)
 import Web.Spock.Config (PoolOrConn (PCPool), defaultSpockCfg)
 import Web.View.Main (loadMainTemplate, mainView)
 import Web.View.Start (loadStartTemplate, startView)
@@ -19,7 +20,9 @@ spockApp =
   prehook (return emptyContext) $
     do
       prehook authHook $
-        do get root $ mainView Nothing
+        do
+          get root $ mainView Nothing
+          post "new_record" newRecordAction
       post "register" registerAction
       post "login" loginAction
 

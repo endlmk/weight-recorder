@@ -92,5 +92,11 @@ spec =
                   bodyContains "登録しました。ログインしてください。" response
                   response2 <- post "/login" "name=hoge&password=hage"
                   assertStatus 302 response2 -- redirect
+                  assertHeader "Location" "/" response2
                   response3 <- get "/"
                   bodyContains "hogeさん、こんにちは" response3
+                  response4 <- post "/new_record" "weight=60.1"
+                  assertStatus 302 response4 -- redirect
+                  assertHeader "Location" "/" response4
+                  response5 <- get "/"
+                  bodyContains "60.1" response5

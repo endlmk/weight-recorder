@@ -11,6 +11,19 @@
 
 {{user.name}}さん、こんにちは
 
+<h2>体重の入力</h2>
+ 
+<form method="POST" action="/new_record">
+  <input type="text" name="weight" /> Kg
+  <input type="submit" value="登録" />
+</form>
+
+<ul>
+{{#records}}
+<li>{{time}}: {{weight}} Kg</li>
+{{/records}}
+</ul>
+
 </body>
 
 </html>
